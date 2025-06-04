@@ -27,7 +27,7 @@ public class RegisterPanel extends JPanel{
 	protected JPasswordField lozinkaInput = new JPasswordField(20);
 	protected SpringLayout springLayout = new SpringLayout();
 	protected JButton dodajButton = new JButton("Registruj Se");
-	protected int selektovanRed = -1;
+	
 	
 	protected JScrollPane scrollPane;
 	
