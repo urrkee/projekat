@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import main.controller.ClanController;
 import main.model.Clan;
 import main.model.Clanarina;
 
@@ -26,8 +27,8 @@ public class RegisterPanel extends JPanel{
 	protected JTextField brTelInput = new JTextField(20);
 	protected JPasswordField lozinkaInput = new JPasswordField(20);
 	protected SpringLayout springLayout = new SpringLayout();
-	protected JButton dodajButton = new JButton("Registruj Se");
-	
+	protected JButton registerButton = new JButton("Registruj Se");
+	protected int selektovanRed = -1;
 	
 	protected JScrollPane scrollPane;
 	
@@ -66,8 +67,8 @@ public class RegisterPanel extends JPanel{
 		springLayout.putConstraint(SpringLayout.WEST, brTelInput,20, SpringLayout.EAST,brTelLabel);
 		springLayout.putConstraint(SpringLayout.EAST, brTelInput, -20, SpringLayout.EAST,this);
 		
-		springLayout.putConstraint(SpringLayout.NORTH, dodajButton, 50, SpringLayout.SOUTH, brTelLabel);
-		springLayout.putConstraint(SpringLayout.HORIZONTAL_CENTER, dodajButton, 0, SpringLayout.HORIZONTAL_CENTER,this);
+		springLayout.putConstraint(SpringLayout.NORTH, registerButton, 50, SpringLayout.SOUTH, brTelLabel);
+		springLayout.putConstraint(SpringLayout.HORIZONTAL_CENTER, registerButton, 0, SpringLayout.HORIZONTAL_CENTER,this);
 		
 		this.add(imeLabel);
 		this.add(imeInput);
@@ -79,9 +80,9 @@ public class RegisterPanel extends JPanel{
 		this.add(brTelInput);
 		this.add(lozinkaLabel);
 		this.add(lozinkaInput);
-		this.add(dodajButton);
+		this.add(registerButton);
 		
-		dodajButton.addActionListener(e->{
+		registerButton.addActionListener(e->{
 			
 			String ime = imeInput.getText().trim();
 			String prezime = prezimeInput.getText().trim();
@@ -90,17 +91,18 @@ public class RegisterPanel extends JPanel{
 			String brTel = brTelInput.getText().trim();
 		 
 			if (ime.isEmpty() || prezime.isEmpty() || email.isEmpty() || lozinka.isEmpty() || brTel.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena!", "Greška", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena!", "Greska", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 		 
 			if (!email.contains("@")) {
-				JOptionPane.showMessageDialog(this, "Unesite ispravan email!", "Greška", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Unesite ispravan email!", "Greska", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 			
 			Clan noviClan = getPodaci();
-			boolean register = noviClan.registrujSe();
+			
+			boolean register = ClanController.registracija(noviClan);
 			
 			if(register) {
 				JOptionPane.showMessageDialog(this, "Uspesno ste se registrovali");

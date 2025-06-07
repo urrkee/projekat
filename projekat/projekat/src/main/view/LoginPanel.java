@@ -8,7 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import main.model.Clan;
+import main.controller.ClanController;
 
 public class LoginPanel extends JPanel{
 	private static final long serialVersionUID = -7647074379910287568L;
@@ -49,7 +49,7 @@ public class LoginPanel extends JPanel{
 			String email = emailInput.getText().trim();
 			String lozinka = new String(lozinkaInput.getPassword());
 			
-			boolean logIn = Clan.logIn(email, lozinka);
+			boolean logIn = ClanController.login(email, lozinka);
 			
 			if (logIn) {
 				JOptionPane.showMessageDialog(this, "Uspesna Prijava");

@@ -71,5 +71,5 @@ public abstract class Korisnik {
 				+ lozinka + "]";
 	}
 
-	public abstract boolean registrujSe();
+	
 }

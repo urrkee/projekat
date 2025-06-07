@@ -45,9 +45,7 @@ public class Clanarina {
 
 
 
-	private void posaljiPodsetnik() {
-		
-	}
+	
 
 
 
